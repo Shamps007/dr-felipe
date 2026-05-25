@@ -27,16 +27,16 @@ export default function App() {
           <div className="pt-4">
             <div>
               <span className="block text-xs uppercase tracking-widest font-semibold text-accent mb-6">
-                Medicina da Dor
+                Médico Especialista em Dor Crônica em Florianópolis
               </span>
-              <h1 className="text-5xl md:text-7xl font-serif text-white leading-[1.15]">
-                Alívio da Dor <br />
-                <span className="text-accent">com Precisão</span>
+              <h1 className="text-4xl md:text-6xl font-serif text-white leading-[1.15]">
+                Medicina Regenerativa <br />
+                <span className="text-accent">para Alívio da Dor</span>
               </h1>
             </div>
             
             <p className="text-xl text-secondary font-light mt-6 tracking-wide">
-              Recuperação funcional de longo prazo
+              Tratamento avançado de lesões esportivas e dor crônica com o Dr. Felipe Lampa. Soluções minimamente invasivas para você recuperar sua qualidade de vida e função física.
             </p>
             
             <blockquote className="border-l-[2px] border-accent/70 pl-6 my-10 py-2">
@@ -58,9 +58,9 @@ export default function App() {
             <div className="bg-surface p-10 border border-white/5 rounded-2xl relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-accent"></div>
               <div className="mb-8 border-b border-white/10 pb-6">
-                <h3 className="text-2xl font-serif text-white mb-3">Agende sua Avaliação</h3>
+                <h3 className="text-2xl font-serif text-white mb-3">Agende sua Consulta</h3>
                 <p className="text-sm text-secondary font-light leading-relaxed">
-                  Preencha os dados e nossa equipe entrará em contato via WhatsApp.
+                  Dê o primeiro passo para o alívio da dor. Fale com nossa equipe em Florianópolis via WhatsApp.
                 </p>
               </div>
               
@@ -116,24 +116,22 @@ export default function App() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center mb-16">
             <div className="w-8 h-[2px] bg-accent mr-4"></div>
-            <h2 className="text-sm font-bold tracking-widest uppercase text-white">Serviços Oferecidos</h2>
+            <h2 className="text-sm font-bold tracking-widest uppercase text-white">Especialidades e Tratamentos</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              "Medicina Regenerativa Musculo-Esquelética",
-              "Tratamento de Lesões Articulares",
-              "Lesões Musculares e Tendíneas",
-              "Tratamento de Dor Neuropática",
-              "Manejo de Dor Crônica",
-              "Procedimentos Guiados por Ultrassom",
-              "Tratamento de Dor Pélvica",
-              "Tratamento de Dor Cervical, Torácica e Lombar",
-              "Tratamento de Dor Complexa Regional"
+              { title: "Medicina Regenerativa", desc: "Recuperação de tecidos e articulações utilizando o potencial curativo do próprio corpo." },
+              { title: "Manejo de Dor Crônica", desc: "Diagnóstico e tratamento especializado para dores persistentes que afetam sua rotina." },
+              { title: "Lesões Esportivas", desc: "Protocolos focados no retorno rápido e seguro ao esporte para atletas amadores e profissionais." },
+              { title: "Procedimentos Guiados por Ultrassom", desc: "Intervenções minimamente invasivas com máxima precisão e segurança." },
+              { title: "Tratamento de Dor Neuropática", desc: "Controle eficaz de dores originadas no sistema nervoso." },
+              { title: "Dores na Coluna e Articulações", desc: "Alívio direcionado para cervical, torácica, lombar, joelhos e ombros." }
             ].map((service, index) => (
               <div key={index} className="bg-surface border border-white/5 p-8 rounded-xl hover:bg-white/5 transition-colors">
                 <div className="w-2 h-2 rounded-full bg-accent mb-6"></div>
-                <h4 className="text-white font-medium tracking-wide leading-relaxed">{service}</h4>
+                <h3 className="text-white font-medium tracking-wide leading-relaxed mb-2">{service.title}</h3>
+                <p className="text-secondary text-sm font-light leading-relaxed">{service.desc}</p>
               </div>
             ))}
           </div>
@@ -172,14 +170,14 @@ export default function App() {
             <div>
               <div className="flex items-center mb-6">
                 <div className="w-8 h-[2px] bg-accent mr-4"></div>
-                <h2 className="text-sm font-bold tracking-widest uppercase text-white">Conheça</h2>
+                <h2 className="text-sm font-bold tracking-widest uppercase text-white">Infraestrutura em Florianópolis</h2>
               </div>
               <h2 className="text-4xl md:text-5xl font-serif text-white max-w-lg">
                 Estrutura & <span className="italic text-secondary">Procedimentos</span>
               </h2>
             </div>
             <p className="text-secondary max-w-sm font-light text-sm leading-relaxed">
-              Dedicação, técnica avançada e cuidado humanizado aplicados a cada paciente para o tratamento eficaz da dor e medicina regenerativa.
+              Ambiente de alta tecnologia na Smart Medicine focado em medicina da dor e conforto do paciente.
             </p>
           </div>
           
@@ -390,9 +388,9 @@ export default function App() {
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="p-10 border border-white/10 bg-surface rounded-2xl text-left hover:bg-white/5 transition-colors">
               <Building2 className="w-8 h-8 text-accent mb-8" />
-              <h3 className="text-2xl font-serif text-white mb-4">CEO Clínica Smart Medicine</h3>
+              <h3 className="text-2xl font-serif text-white mb-4">Smart Medicine Florianópolis</h3>
               <p className="text-secondary font-light mb-10 leading-relaxed">
-                Clínica especializada em medicina avançada, integrando tecnologia e cuidado individualizado ao paciente com dor crônica e aguda.
+                Clínica líder em medicina da dor localizada no bairro Coqueiros. Integramos tecnologia inovadora de medicina regenerativa com o cuidado individualizado promovido pelo Dr. Felipe Lampa.
               </p>
             </div>
 
