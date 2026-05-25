@@ -1,4 +1,4 @@
-import { Award, BookOpen, Building2, ChevronRight, MessageCircle, Stethoscope, Microscope, ArrowRight } from 'lucide-react';
+import { Award, BookOpen, Building2, ChevronRight, MessageCircle, Stethoscope, Microscope, ArrowRight, Star } from 'lucide-react';
 
 export default function App() {
   return (
@@ -7,7 +7,7 @@ export default function App() {
       <nav className="fixed top-0 w-full z-50 bg-background/95 backdrop-blur-sm border-b border-white/5 px-6 py-5">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="text-xl font-serif font-medium text-white tracking-wide">
-            Dr. Felipe <span className="font-bold text-accent">Lampa</span>
+            Smart <span className="font-bold text-accent">Medicine</span>
           </div>
           <div className="hidden md:flex items-center space-x-10 text-xs uppercase tracking-widest font-medium text-secondary">
             <a href="#servicos" className="hover:text-white transition-colors">Serviços</a>
@@ -224,7 +224,7 @@ export default function App() {
                 </div>
                 <div>
                   <h3 className="text-2xl font-serif text-white mb-3 tracking-wide">CIPS-WIP</h3>
-                  <p className="text-secondary font-light leading-relaxed">Especialista em terapias intervencionistas pelo World Institute of Pain (Certified Interventional Pain Sonologist).</p>
+                  <p className="text-secondary font-light leading-relaxed">Título internacional em tratamento intervencionista guiado por ultrassom pela World Institute of Pain (Certified Interventional Pain Sonologist).</p>
                 </div>
               </div>
               
@@ -310,6 +310,71 @@ export default function App() {
         </div>
       </section>
 
+      {/* Avaliações */}
+      <section className="py-24 px-6 border-t border-white/5 bg-surface/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-16">
+            <div>
+              <div className="flex items-center mb-6">
+                <div className="w-8 h-[2px] bg-accent mr-4"></div>
+                <h2 className="text-sm font-bold tracking-widest uppercase text-white">Avaliações</h2>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-serif text-white mb-4">
+                O que dizem <span className="italic text-secondary">nossos pacientes</span>
+              </h2>
+              <div className="flex items-center gap-2">
+                <span className="text-xl font-bold text-white">5,0</span>
+                <div className="flex gap-1">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                  ))}
+                </div>
+                <span className="text-secondary text-sm ml-2">55 avaliações no Google</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <ReviewCard
+              name="Eliseu Cardoso"
+              metadata="5 avaliações"
+              date="2 meses atrás"
+              content="Deixo aqui meu reconhecimento e agradecimento ao Dr. Felipe Lampa pelo trabalho excepcional realizado na lesão do joelho. Desde o início ficou evidente o alto nível de preparo e especialização."
+            />
+            <ReviewCard
+              name="RH Elohim"
+              metadata="1 avaliação"
+              date="2 meses atrás"
+              content="Tive a honra de ser atendido pelo Dr. Felipe Lampa e posso afirmar com convicção: é um profissional diferenciado. Especialista em dor, demonstra um conhecimento técnico profundo, segurança..."
+            />
+            <ReviewCard
+              name="Peter Montibeller"
+              metadata="1 avaliação"
+              date="2 meses atrás"
+              content="Sou muito grato ao Dr. Felipe Lampa e a smart. Treinando Jiu Jitsu, tive duas na tíbia e no joelho, além da lesão no LCA que rompeu por completo. Por conta do meu trabalho eu não poderia operar, foi aí que a smart me ajudou. Fizemos duas..."
+            />
+            <ReviewCard
+              name="Loreni Maria de Oliveira"
+              metadata="5 avaliações"
+              date="3 meses atrás"
+              content="Dr. Felipe Lampa é um médico muito competente tecnicamente atualizado e humanizado demonstrando empatia e boa comunicação. Sua competência e cuidado estão fazendo toda a diferença no meu tratamento."
+            />
+            <ReviewCard
+              name="Luciano Bernert"
+              metadata="21 avaliações"
+              date="4 meses atrás"
+              content="Tive uma experiência excelente na clínica do Dr. Felipe Lampa. Já indico vários atletas para ele há algum tempo, mas também fiz meu próprio tratamento de hérnia de disco, problema no quadril e aplicações na cervical e lombar."
+            />
+            <ReviewCard
+              name="Dafne Cunha"
+              metadata="1 avaliação"
+              date="3 meses atrás"
+              content="Gostaria de deixar meus agradecimentos ao Dr Felipe Lampa!!!Eu sofria a mais de um ano com uma dor crônica em meu pé esquerdo, Dr Felipe foi um anjo em vida além de um profissional de excelência..."
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Empreendedorismo & Liderança */}
       <section id="clinicas" className="py-32 px-6 border-t border-white/5 bg-surface/50">
         <div className="max-w-7xl mx-auto">
@@ -385,7 +450,7 @@ export default function App() {
               <span className="text-white/20">|</span>
               <span>RQE 23642</span>
             </div>
-            <p className="text-[10px]">© {new Date().getFullYear()} Dr. Felipe Lampa.</p>
+            <p className="text-[10px]">© {new Date().getFullYear()} Smart Medicine.</p>
           </div>
           
         </div>
@@ -404,6 +469,27 @@ function TimelineItem({ year, title, description }: { year: string, title: strin
         <h4 className="text-xl font-serif text-white mb-3 group-hover:text-accent transition-colors">{title}</h4>
         <p className="text-secondary font-light leading-relaxed text-sm">{description}</p>
       </div>
+    </div>
+  );
+}
+
+function ReviewCard({ name, metadata, date, content }: { name: string, metadata: string, date: string, content: string }) {
+  return (
+    <div className="bg-surface border border-white/5 p-8 rounded-xl flex flex-col gap-4 hover:bg-white/5 transition-colors">
+      <div className="flex gap-1">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+        ))}
+      </div>
+      <div>
+        <h4 className="text-white font-medium mb-1">{name}</h4>
+        <p className="text-secondary text-xs">
+          {metadata} • {date}
+        </p>
+      </div>
+      <p className="text-secondary font-light text-sm italic leading-relaxed">
+        "{content}"
+      </p>
     </div>
   );
 }
