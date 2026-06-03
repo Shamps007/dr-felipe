@@ -6,9 +6,9 @@ export default function App() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-background/95 backdrop-blur-sm border-b border-white/5 px-6 py-5">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="text-xl font-serif font-medium text-white tracking-wide">
-            Smart <span className="font-bold text-accent">Medicine</span>
-          </div>
+          <a href="#" className="flex-shrink-0">
+            <img src="/logo.png" alt="Smart Medicine Logo" className="h-16 md:h-20 w-auto object-contain" />
+          </a>
           <div className="hidden md:flex items-center space-x-10 text-xs uppercase tracking-widest font-medium text-secondary">
             <a href="#servicos" className="hover:text-white transition-colors">Serviços</a>
             <a href="#sobre" className="hover:text-white transition-colors">Sobre</a>
