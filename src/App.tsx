@@ -26,67 +26,116 @@ const REVIEWS = [
 
 const CONDITIONS = [
   { 
-    title: "DOR LOMBAR", 
-    desc: "Tratamento especializado para dores na região mais baixa da coluna, que frequentemente irradiam, buscando restaurar a mobilidade e qualidade de vida.", 
-    img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=600",
-    fullDesc: "A dor lombar é uma das queixas mais comuns, podendo variar de um incômodo leve a uma dor limitante. Pode ser causada por contraturas musculares, alterações discais (como hérnias) ou degeneração articular. O tratamento foca em aliviar a dor e estabilizar a coluna para prevenir novas crises.",
-    whatsappMsg: "Olá, estou com dor lombar e gostaria de agendar uma avaliação com o Dr. Felipe Lampa para entender e tratar esse problema."
+    title: "TRATAMENTO PARA DOR NO OMBRO", 
+    desc: "Manejo da dor e inflamação nos tendões e articulações, com foco na recuperação de lesões como tendinites e bursites.", 
+    img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Tratamentos focados em restaurar a mobilidade do ombro, visando a desinflamação de bursas (bursite), recuperação de tendões e alívio do desgaste articular, promovendo uma rápida retomada das atividades do dia a dia.",
+    whatsappMsg: "Olá, busco tratamento para dor no ombro e gostaria de agendar uma consulta."
   },
   { 
-    title: "DOR CERVICAL", 
-    desc: "Alívio direcionado para dores no pescoço e ombros, frequentemente associadas a tensões musculares, estresse ou problemas posturais e discais.", 
+    title: "TRATAMENTO PARA DOR NO JOELHO", 
+    desc: "Protocolos para desgaste (artrose), condromalácia, lesões meniscais e ligamentares focados no alívio eficaz.", 
+    img: "https://images.unsplash.com/photo-1526502787834-4b53ef12fcc0?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Visando preservar a articulação e retardar processos degenerativos como a artrose. Oferecemos procedimentos para alívio imediato da dor no joelho e regeneração dos tecidos prejudicados, trazendo firmeza ao caminhar.",
+    whatsappMsg: "Olá, gostaria de tratamento para dor no joelho, posso agendar avaliação?"
+  },
+  { 
+    title: "TRATAMENTO PARA DOR LOMBAR", 
+    desc: "Tratamento especializado para dores na região mais baixa da coluna, estabilizando e restaurando a mobilidade.", 
+    img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Por meio de intervenções e acompanhamento direcionado, tratamos das causas da dor, como discopatia degenerativa e ciatalgia, promovendo o retorno da flexibilidade da coluna.",
+    whatsappMsg: "Olá, estou com dor lombar e gostaria de agendar uma consulta para o tratamento."
+  },
+  { 
+    title: "TRATAMENTO PARA DOR CRÔNICA", 
+    desc: "Abordagem ampla para o alívio de quadros de dores insistentes, diminuindo as crises no dia a dia.", 
+    img: "https://images.unsplash.com/photo-1559839914-11aae4f08823?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Dores que duram mais que 3 meses necessitam de atenção especial. Nosso foco com o tratamento da dor crônica é utilizar a mais moderna tecnologia para bloquear o estímulo doloroso persistente e quebrar o ciclo de dor.",
+    whatsappMsg: "Olá, procuro tratamento para dor crônica, gostaria de agendar uma visita."
+  },
+  { 
+    title: "MÉDICO ESPECIALIZADO EM DOR CRÔNICA", 
+    desc: "Cuidado guiado por profissional especialista em localizar e tratar a origem da dor de forma contínua.", 
+    img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Um médico especializado em dor oferece as melhores estratégias e procedimentos não cirúrgicos para identificar exatamente de onde vem o sinal de dor, atuando em cima de cada foco específico com tratamentos e protocolos efetivos.",
+    whatsappMsg: "Olá, gostaria da avaliação de um médico especializado em dor crônica."
+  },
+  { 
+    title: "CLÍNICA DA DOR EM FLORIANÓPOLIS", 
+    desc: "Infraestrutura avançada e atendimento humanitário com equipe multidisciplinar e foco no bem-estar.", 
+    img: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "A clínica oferece conforto, atendimento excelente, infraestrutura de ponta e equipe preparada para reestruturar a qualidade de vida de pacientes que sofrem com dores de diferentes graus e origens.",
+    whatsappMsg: "Olá, quero agendar uma visita à Clínica da Dor em Florianópolis."
+  },
+  { 
+    title: "TRATAMENTO PARA LESÕES DO ESPORTE", 
+    desc: "Protocolos guiados de recuperação para estiramentos e distensões desportivas com foco em retomar a prática.", 
+    img: "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Desportistas frequentemente sofrem esgotamento muscular, entorses e impactos severos. O tratamento para lesões do esporte objetiva acelerar o processo inflamatório em direção a uma reabilitação efetiva e segura.",
+    whatsappMsg: "Olá, sofri uma lesão praticando esportes e busco tratamento específico."
+  },
+  { 
+    title: "FIBROMIALGIA", 
+    desc: "Acompanhamento integral focado na redução dos pontos de sensibilidade e melhoria do bem estar global do corpo.", 
     img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=600",
-    fullDesc: "Conhecida como cervicalgia, a dor na região do pescoço frequentemente se espalha para os ombros e braços. É muito vinculada ao estresse, má postura no uso de telas e problemas nos discos intervertebrais. O tratamento devolve a mobilidade e reduz a tensão constante.",
-    whatsappMsg: "Olá, estou com dor cervical e gostaria de marcar uma consulta para aliviá-la e encontrar o melhor tratamento."
+    fullDesc: "Condição musculoesquelética generalizada que afeta também a disposição e o sono. O tratamento abrange medicação, procedimentos de ação sistêmica e mudanças comportamentais para dar suporte e conforto a quem convive com fibromialgia.",
+    whatsappMsg: "Olá, preciso de um protocolo de acompanhamento para minha fibromialgia."
   },
   { 
     title: "DOR ARTICULAR", 
-    desc: "Abordagem focada em restaurar a função e diminuir o desconforto em articulações como joelhos, ombros, quadris e punhos com alta precisão.", 
+    desc: "Abordagem focada em restaurar a função em articulações como joelhos, ombros, quadris e punhos.", 
     img: "https://images.unsplash.com/photo-1522898467493-49726bf28798?auto=format&fit=crop&q=80&w=600",
-    fullDesc: "Dores articulares afetam a cartilagem e as estruturas vizinhas, como joelhos, quadris e ombros, muitas vezes relacionadas ao desgaste (artrose) ou inflamação. A abordagem inclui técnicas e procedimentos da medicina regenerativa para frear a degeneração e aliviar o quadro álgico.",
-    whatsappMsg: "Olá, estou com dor articular e preciso de um atendimento especializado. Gostaria de agendar uma consulta."
+    fullDesc: "A dor em áreas articulares exige um tratamento focado na estabilidade com procedimentos que tratem o desgaste do local, desinflamem os tendões ou previnam o agravamento de doenças pré-existentes.",
+    whatsappMsg: "Olá, sinto dores articulares nas minhas juntas, quero agendar consulta."
   },
   { 
     title: "DOR NEUROPÁTICA", 
-    desc: "A dor neuropática resulta de danos ou disfunções no sistema nervoso. Caracteriza-se por sensações de queimação, formigamento ou choque.", 
+    desc: "Caracteriza-se por sensações de queimação ou choque devido a disfunções ou danos no sistema nervoso.", 
     img: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=600",
-    fullDesc: "Causada por disfunção ou lesão nos nervos, é frequentemente descrita como choque, pontada ou queimação, podendo estar associada à diabetes, infecções (como herpes-zóster) ou compressões nervosas (ciático). Requer um manejo muito específico para o controle neurológico.",
-    whatsappMsg: "Olá, sofro de dor neuropática (choques/queimação) e gostaria de agendar uma avaliação com o especialista."
+    fullDesc: "Uma dor originada no processamento de informações dos nervos periféricos. Nossas intervenções de alívio ajudam a regular esta condução alterada da dor para que se tenha conforto a longo prazo sem formigamento persistente.",
+    whatsappMsg: "Olá, acredito estar com dor neuropática (choques/queimação) e busco ajuda médica."
   },
   { 
-    title: "LESÃO MUSCULAR", 
-    desc: "Protocolos de recuperação acelerada para estiramentos e rupturas musculares, promovendo regeneração adequada do tecido e prevenção.", 
-    img: "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=600",
-    fullDesc: "Muito comuns na prática esportiva, as lesões musculares como estiramentos necessitam de um diagnóstico e tratamento precisos. Utilizamos abordagens que auxiliam na cicatrização do tecido muscular, evitando fibroses e acelerando o retorno seguro à atividade física.",
-    whatsappMsg: "Olá, tive uma lesão muscular e gostaria de marcar uma consulta para focar na minha recuperação."
+    title: "DOR RELACIONADA AO CÂNCER", 
+    desc: "Manejo com suporte para controle dos sintomas advindos tanto do tumor quanto dos tratamentos oncológicos.", 
+    img: "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Para melhorar a qualidade do paciente ao longo de tratamentos delicados, aplicamos um suporte amplo para dor, empregando desde bloqueios neurológicos a intervenções que gerem maior conforto no convívio diário.",
+    whatsappMsg: "Olá, busco informações sobre consultas na atuação contra a dor."
   },
   { 
-    title: "EPICONDILITE", 
-    desc: "Tratamento eficaz para dores nos cotovelos, muitas vezes relacionadas a sobrecarga e movimentos repetitivos de punho e braço em esportes ou trabalho.", 
-    img: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=600",
-    fullDesc: "Popularmente conhecida como 'cotovelo de tenista' ou 'cotovelo de golfista', é uma inflamação dos tendões que se ligam ao cotovelo. Causada por esforço repetitivo, o tratamento visa não apenas aliviar a dor aguda, mas regenerar o tecido tendíneo afetado.",
-    whatsappMsg: "Olá, estou com sintomas de epicondilite (dor no cotovelo) e gostaria de agendar uma consulta para tratamento."
-  },
-  { 
-    title: "BURSITE", 
-    desc: "Manejo e desinflamação das bursas, bolsas de líquido que protegem os tendões e articulações, mais comuns nos ombros, cotovelos e quadris.", 
-    img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=600",
-    fullDesc: "Bursite é a inflamação das bursas, pequenas bolsas que funcionam como amortecedores nas articulações (frequentemente no ombro, quadril ou cotovelo). Provoca dor e restrição de movimento. A intervenção busca reduzir o processo inflamatório e reestabelecer a fluidez do movimento.",
-    whatsappMsg: "Olá, estou com bursite e gostaria de marcar uma avaliação com o Dr. Felipe Lampa para tratamento."
-  },
-  { 
-    title: "CEFALEIAS", 
-    desc: "Investigação da origem e tratamento direcionado para diferentes tipos de dores de cabeça crônicas, incluindo enxaquecas e cefaleias tensionais.", 
-    img: "https://images.unsplash.com/photo-1512069772995-ec65ed5dcafd?auto=format&fit=crop&q=80&w=600",
-    fullDesc: "Dores de cabeça crônicas e enxaquecas têm um grande impacto na qualidade de vida. O tratamento muitas vezes vai além do uso de analgésicos, incluindo bloqueios de nervos periféricos e abordagens multidisciplinares para espaçar as crises e reduzir sua intensidade.",
-    whatsappMsg: "Olá, estou sofrendo com dores de cabeça crônicas (cefaleias) e gostaria de agendar uma consulta."
-  },
-  { 
-    title: "PERFORMANCE ESPORTIVA", 
-    desc: "Acompanhamento focado em atletas e praticantes de atividades físicas, otimizando o movimento para alcançar o desempenho máximo com segurança.", 
+    title: "LESÕES CRÔNICAS DO ESPORTE", 
+    desc: "Focado no auxílio em recuperar desgastes advindos do excesso de alta repetição nas práticas esportivas.", 
     img: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=600",
-    fullDesc: "Estratégias avançadas para melhorar a performance esportiva, analisando a biomecânica e identificando desequilíbrios. O objetivo é atuar preventivamente para evitar lesões, promovendo um corpo preparado para as exigências do esporte em alto nível.",
-    whatsappMsg: "Olá, gostaria de agendar uma avaliação com foco em performance esportiva e otimização do meu desempenho."
+    fullDesc: "Estas lesões crônicas no esporte ocorrem por micro trações constantes, logo, nosso papel é tratar as micro-lesões localizadas permitindo que você regresse à atividade sem limitações.",
+    whatsappMsg: "Olá, convivo com uma lesão crônica de esporte, busco soluções."
+  },
+  { 
+    title: "SÍNDROME MIOFASCIAL", 
+    desc: "A síndrome miofascial conta com contraturas chamadas de pontos gatilhos presentes nos músculos.", 
+    img: "https://images.unsplash.com/photo-1512069772995-ec65ed5dcafd?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Caracterizada por pontos e faixas incômodos dolorosos, em áreas musculares profundas. Tratamos as regiões afetadas a fim de paralisar rapidamente essa corrente ininterrupta que estressa por todo o seu trajeto.",
+    whatsappMsg: "Olá, tenho espasmos e pontos dolorosos da Síndrome Miofascial. Gostaria de tratar."
+  },
+  { 
+    title: "QUALIDADE DO SONO", 
+    desc: "Investiga sintomas para intervir nos distúrbios da dor que costumam afetar ciclos regulares para se dormir.", 
+    img: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "A interrupção do sono tem correlações com o aumento natural da dor. Encontramos soluções junto aos tratamentos primários para estabilizar seus mecanismos e promover descanso pleno.",
+    whatsappMsg: "Olá, minha dor constante impacta meu longo do sono. Desejo consultar-me."
+  },
+  { 
+    title: "TRATAMENTO DA COLUNA", 
+    desc: "Procedimentos e direcionamento visando corrigir ou estabilizar áreas com hérnia de disco e doenças relacionadas.", 
+    img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Empregamos avaliações profundas seguidas de métodos seguros minimamente invasivos associados a bons suportes à Coluna e tratamento para Hérnia de Disco com intenção de aliviar e garantir autonomia nos dias.",
+    whatsappMsg: "Olá, necessito de avaliação voltada para o tratamento de minha coluna e hérnia de disco."
+  },
+  { 
+    title: "MEDICINA REGENERATIVA", 
+    desc: "Repara tecidos doloridos utilizando processos estimulativos provenientes e ativados pelo corpo do próprio paciente.", 
+    img: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Esta intervenção contemporânea se pauta em métodos focados na área da dor ou degeneração, estimulando que as partes debilitadas se curem. Permite desinflamar naturalmente e frear danos progressivos.",
+    whatsappMsg: "Olá, gostaria de saber mais sobre opções de medicina regenerativa para a minha doença."
   }
 ];
 
@@ -112,7 +161,7 @@ export default function App() {
       <nav className="fixed top-0 w-full z-50 bg-background/95 backdrop-blur-sm border-b border-white/5 px-6 py-5">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <a href="#" className="flex-shrink-0">
-            <img src="/logo.png" alt="Smart Medicine Logo" className="h-16 md:h-20 w-auto object-contain" />
+            <img src="/logo.png" alt="Smart Medicine Logo" className="h-20 md:h-28 w-auto object-contain" />
           </a>
           <div className="hidden md:flex items-center space-x-10 text-xs uppercase tracking-widest font-medium text-secondary">
             <a href="#servicos" className="hover:text-white transition-colors">Serviços</a>
@@ -132,11 +181,11 @@ export default function App() {
           <div className="pt-4">
             <div>
               <span className="block text-xs uppercase tracking-widest font-semibold text-accent mb-6">
-                Médico Especialista em Dor Crônica em Florianópolis
+                Médico Especialista em Dor Crônica
               </span>
               <h1 className="text-4xl md:text-6xl font-serif text-white leading-[1.15]">
-                Medicina Regenerativa <br />
-                <span className="text-accent">para Alívio da Dor</span>
+                Médico da Dor em <br />
+                <span className="text-accent">Florianópolis</span>
               </h1>
             </div>
             
@@ -159,13 +208,13 @@ export default function App() {
             </div>
           </div>
 
-          <div className="w-full max-w-md mx-auto md:ml-auto relative">
-            <div className="aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 hidden md:block">
+          <div className="w-full max-w-lg md:max-w-xl mx-auto md:ml-auto relative">
+            <div className="aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 hidden md:block">
               <img src="/img2.jpeg" alt="Dr. Felipe Lampa" className="w-full h-full object-cover object-[center_10%]" />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-surface p-6 rounded-xl border border-white/5 shadow-2xl hidden md:block">
-               <p className="text-sm font-bold text-white uppercase tracking-widest mb-1">Dr. Felipe Lampa</p>
-               <p className="text-xs text-secondary">Especialista em Dor Crônica</p>
+               <p className="text-base font-bold text-white uppercase tracking-widest mb-1">Dr. Felipe Lampa</p>
+               <p className="text-sm text-secondary">Especialista em Dor Crônica</p>
             </div>
           </div>
         </div>
@@ -474,19 +523,16 @@ export default function App() {
           </div>
           <div className="space-y-6 text-secondary font-light text-lg leading-relaxed">
             <p>
-              O Dr. Felipe Lampa é especialista no diagnóstico e tratamento de condições que afetam a mobilidade, desempenho físico e qualidade de vida dos pacientes. Através da <strong className="text-white font-medium">medicina regenerativa</strong> e de procedimentos minimamente invasivos guiados por ultrassom, é possível tratar diferentes causas de dor de forma precisa e personalizada.
+              O Dr. Felipe Lampa atua como <strong className="text-white font-medium">Médico Especializado em Dor Crônica</strong>, focado no diagnóstico e alívio de condições que afetam a qualidade de vida. Através de um cuidado direcionado em nossa <strong className="text-white font-medium">Clínica da Dor em Florianópolis</strong>, você encontra a estrutura ideal para recuperar o bem-estar.
             </p>
             <p>
-              Entre as principais condições atendidas estão <strong className="text-white font-medium">dor lombar</strong>, <strong className="text-white font-medium">dor cervical</strong>, <strong className="text-white font-medium">dor articular</strong>, <strong className="text-white font-medium">dor neuropática</strong>, <strong className="text-white font-medium">lesão muscular</strong>, <strong className="text-white font-medium">epicondilite</strong>, <strong className="text-white font-medium">bursite</strong> e <strong className="text-white font-medium">cefaleias</strong>.
+              Se você está buscando <strong className="text-white font-medium">Tratamento para Dor no Ombro</strong>, <strong className="text-white font-medium">Tratamento para Dor no Joelho</strong>, <strong className="text-white font-medium">Tratamento para Dor Lombar</strong> ou <strong className="text-white font-medium">Tratamento para Hérnia de Disco</strong>, oferecemos protocolos não-cirúrgicos, com procedimentos intervencionistas guiados por ultrassom que agem de forma rápida e segura na raiz do problema.
             </p>
             <p>
-              Pacientes que sofrem com dores persistentes na coluna, pescoço, ombros, joelhos, quadril ou que apresentam limitações causadas por lesões esportivas podem se beneficiar de uma avaliação especializada para identificar a origem do problema e definir o melhor plano terapêutico.
+              Para atletas ou pessoas ativas que sofrem desgastes constantes, possuímos sólida experiência em <strong className="text-white font-medium">Tratamento para Lesões do Esporte</strong>, ajudando-os a retornarem às suas práticas sem limitações, além de realizar <strong className="text-white font-medium">Tratamento para Dor Crônica</strong> associadas à fadiga repetitiva.
             </p>
             <p>
-              Além do tratamento da dor, a Smart Medicine também atua na recuperação funcional e na <strong className="text-white font-medium">performance esportiva</strong>, auxiliando atletas amadores e profissionais a retornarem às suas atividades com mais segurança, desempenho e qualidade de movimento.
-            </p>
-            <p>
-              Se você procura tratamento para dor lombar, dor cervical, dor articular, dor neuropática, lesões musculares, bursite, epicondilite, cefaleias ou deseja melhorar sua performance esportiva em Florianópolis, agende uma avaliação com o Dr. Felipe Lampa e conheça as opções de tratamento disponíveis.
+              Caso a sua busca seja por um <strong className="text-white font-medium">Médico da Dor</strong> com visão humana e conhecimento avançado na resolução de sintomas persistentes, nossa equipe está pronta para acolhê-lo.
             </p>
           </div>
         </div>
