@@ -18,3 +18,16 @@ body {
   color: var(--color-primary);
   -webkit-font-smoothing: antialiased;
 }
+
+@keyframes infinite-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 12px)); } /* 12px is half of gap-6 (1.5rem = 24px) */
+}
+
+.animate-infinite-scroll {
+  animation: infinite-scroll 150s linear infinite;
+}
+
+.animate-infinite-scroll:hover {
+  animation-play-state: paused;
+}

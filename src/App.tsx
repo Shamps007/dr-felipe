@@ -1,6 +1,111 @@
-import { Award, BookOpen, Building2, ChevronRight, MessageCircle, Stethoscope, Microscope, ArrowRight, Star } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { Award, BookOpen, Building2, ChevronRight, MessageCircle, Stethoscope, Microscope, ArrowRight, Star, ChevronLeft, X } from 'lucide-react';
+
+const REVIEWS = [
+  { name: "Eliseu Cardoso", metadata: "5 críticas", date: "há 3 meses", content: "Deixo aqui meu reconhecimento e agradecimento ao Dr. Felipe Lampa pelo trabalho excepcional realizado na lesão do joelho. Desde o início ficou evidente o alto nível de preparo e especialização." },
+  { name: "RH Elohim", metadata: "1 crítica", date: "há 3 meses", content: "Tive a honra de ser atendido pelo Dr. Felipe Lampa e posso afirmar com convicção: é um profissional diferenciado. Especialista em dor, demonstra um conhecimento técnico profundo, segurança..." },
+  { name: "Peter Montibeller", metadata: "1 crítica", date: "há 3 meses", content: "Sou muito grato ao Dr. Felipe Lampa e a smart. Treinando Jiu Jitsu, tive duas na tíbia e no joelho, além da lesão no LCA que rompeu por completo. Por conta do meu trabalho eu não poderia operar, foi aí que a smart me ajudou." },
+  { name: "Loreni Maria de Oliveira", metadata: "6 críticas", date: "há 3 meses", content: "Dr. Felipe Lampa é um médico muito competente tecnicamente atualizado e humanizado demonstrando empatia e boa comunicação. Sua competência e cuidado estão fazendo toda a diferença no meu tratamento." },
+  { name: "Luciano Bernert", metadata: "Guia local • 21 críticas", date: "há 4 meses", content: "Tive uma experiência excelente na clínica do Dr. Felipe Lampa. Já indico vários atletas para ele há algum tempo, mas também fiz meu próprio tratamento de hérnia de disco, problema no quadril e aplicações na cervical e lombar." },
+  { name: "Ketty Bruno", metadata: "Guia local • 16 críticas", date: "há 4 meses", content: "Atendimento para lá de extraordinário, Dr Felipe Lampa é um ser ímpar, pensa em um médico empático, profissional e competente, levei minha irmã para uma consulta com ele, sai de boca aberta de tamanha capacidade..." },
+  { name: "Rodrigo Schappo Hilleshein", metadata: "Guia local • 18 críticas", date: "há 3 meses", content: "Excelente e cordial atendimento de toda equipe. É difícil nos dias de hoje encontrar um médico humano e atencioso como Dr. Felipe Lampa. Obrigado Deus por colocar um profissional excepcional em meu caminho!" },
+  { name: "Dafne Cunha", metadata: "1 crítica", date: "há 4 meses", content: "Gostaria de deixar meus agradecimentos ao Dr Felipe Lampa!!!Eu sofria a mais de um ano com uma dor crônica em meu pé esquerdo, Dr Felipe foi um anjo em vida além de um profissional de excelência..." },
+  { name: "taty perucio", metadata: "Guia local • 18 críticas", date: "há 3 meses", content: "Para mim foi sensacional, desde a consulta ja se mostrou conhecedor, depois dos exames fiz a cirurgia e em seguida fui procurada pela equipe para saber dos resultados, ele mesmo falou comigo, achei humanizado e respeitoso o atendimento." },
+  { name: "Otavio Collar", metadata: "1 crítica", date: "há 4 meses", content: "Atendimento expetacular pelo Dr Felipe Lampa que resolveu uma dor crônica que me limitava no esporte, sou muito grato por poder fazer novamente qualquer atividade sem nem me lembrar da dor que me acompanhava há 3 anos" },
+  { name: "Luiz Roberto Santos", metadata: "3 críticas", date: "há 4 meses", content: "Nossa experiência com a clínica foi ótima desde o primeiro contato. As meninas do atendimento super prestativas e ágeis. No dia do procedimento, fomos atendidos pelo Dr. Felipe, anestesista. Excelente profissional." },
+  { name: "Olimpia Maria", metadata: "3 críticas", date: "há 4 meses", content: "Muito bom o Dr Felipe é um ótimo médico agradeço o Dr Mauro Fagundes Dornelles por te me endicado ele pra tirar minhas dor muito obrigada Dr Felipe lampa que vc continue sendo este médico especial" },
+  { name: "churrascada4x4 offroad", metadata: "7 críticas", date: "há 3 meses", content: "Atendimento profissional, da equipe Dr Felipe excelente no atendimento e preocupação com o paciente , a atendente Lorrana foi de uma educação a de se admirar , obrigado a todos." },
+  { name: "laboratorio de combate", metadata: "9 críticas", date: "há 3 meses", content: "Excelente clínica, com um ambiente confortável e atendimento humanizado. Recomendo a todos! 👏🏼" },
+  { name: "Talles Silva", metadata: "Guia local • 30 críticas", date: "há 3 meses", content: "Clínica referência no suporte da medicina esportiva e da melhora e cura de dores crônicas como foi meu caso." },
+  { name: "Gustavo Teixeira", metadata: "9 críticas", date: "há 4 meses", content: "Super recomendo a clínica smart medicine atendimento de qualidade e equipe muito profissional e preparada para atender da melhor forma" },
+  { name: "jeferson medeiros", metadata: "4 críticas", date: "há 3 meses", content: "Ambiente ótimo e profissionais qualificados! Tratamento diferenciado. Recomendo" },
+  { name: "Charles Jansen", metadata: "4 críticas", date: "há 2 meses", content: "É a melhor clínica no que se propõe. Recomendo!" },
+  { name: "Gabriel Ramos", metadata: "Guia local • 38 críticas", date: "há 11 meses", content: "Dr. Felipe Lampa é um profissional excepcional, fiz um procedimento no ombro e deu tudo certo, atendimento 10!!" },
+  { name: "Marina Poersch", metadata: "7 críticas", date: "há 9 meses", content: "Clínica equipada e atendimento diferenciado! Muito bom!" }
+];
+
+const CONDITIONS = [
+  { 
+    title: "DOR LOMBAR", 
+    desc: "Tratamento especializado para dores na região mais baixa da coluna, que frequentemente irradiam, buscando restaurar a mobilidade e qualidade de vida.", 
+    img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "A dor lombar é uma das queixas mais comuns, podendo variar de um incômodo leve a uma dor limitante. Pode ser causada por contraturas musculares, alterações discais (como hérnias) ou degeneração articular. O tratamento foca em aliviar a dor e estabilizar a coluna para prevenir novas crises.",
+    whatsappMsg: "Olá, estou com dor lombar e gostaria de agendar uma avaliação com o Dr. Felipe Lampa para entender e tratar esse problema."
+  },
+  { 
+    title: "DOR CERVICAL", 
+    desc: "Alívio direcionado para dores no pescoço e ombros, frequentemente associadas a tensões musculares, estresse ou problemas posturais e discais.", 
+    img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Conhecida como cervicalgia, a dor na região do pescoço frequentemente se espalha para os ombros e braços. É muito vinculada ao estresse, má postura no uso de telas e problemas nos discos intervertebrais. O tratamento devolve a mobilidade e reduz a tensão constante.",
+    whatsappMsg: "Olá, estou com dor cervical e gostaria de marcar uma consulta para aliviá-la e encontrar o melhor tratamento."
+  },
+  { 
+    title: "DOR ARTICULAR", 
+    desc: "Abordagem focada em restaurar a função e diminuir o desconforto em articulações como joelhos, ombros, quadris e punhos com alta precisão.", 
+    img: "https://images.unsplash.com/photo-1522898467493-49726bf28798?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Dores articulares afetam a cartilagem e as estruturas vizinhas, como joelhos, quadris e ombros, muitas vezes relacionadas ao desgaste (artrose) ou inflamação. A abordagem inclui técnicas e procedimentos da medicina regenerativa para frear a degeneração e aliviar o quadro álgico.",
+    whatsappMsg: "Olá, estou com dor articular e preciso de um atendimento especializado. Gostaria de agendar uma consulta."
+  },
+  { 
+    title: "DOR NEUROPÁTICA", 
+    desc: "A dor neuropática resulta de danos ou disfunções no sistema nervoso. Caracteriza-se por sensações de queimação, formigamento ou choque.", 
+    img: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Causada por disfunção ou lesão nos nervos, é frequentemente descrita como choque, pontada ou queimação, podendo estar associada à diabetes, infecções (como herpes-zóster) ou compressões nervosas (ciático). Requer um manejo muito específico para o controle neurológico.",
+    whatsappMsg: "Olá, sofro de dor neuropática (choques/queimação) e gostaria de agendar uma avaliação com o especialista."
+  },
+  { 
+    title: "LESÃO MUSCULAR", 
+    desc: "Protocolos de recuperação acelerada para estiramentos e rupturas musculares, promovendo regeneração adequada do tecido e prevenção.", 
+    img: "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Muito comuns na prática esportiva, as lesões musculares como estiramentos necessitam de um diagnóstico e tratamento precisos. Utilizamos abordagens que auxiliam na cicatrização do tecido muscular, evitando fibroses e acelerando o retorno seguro à atividade física.",
+    whatsappMsg: "Olá, tive uma lesão muscular e gostaria de marcar uma consulta para focar na minha recuperação."
+  },
+  { 
+    title: "EPICONDILITE", 
+    desc: "Tratamento eficaz para dores nos cotovelos, muitas vezes relacionadas a sobrecarga e movimentos repetitivos de punho e braço em esportes ou trabalho.", 
+    img: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Popularmente conhecida como 'cotovelo de tenista' ou 'cotovelo de golfista', é uma inflamação dos tendões que se ligam ao cotovelo. Causada por esforço repetitivo, o tratamento visa não apenas aliviar a dor aguda, mas regenerar o tecido tendíneo afetado.",
+    whatsappMsg: "Olá, estou com sintomas de epicondilite (dor no cotovelo) e gostaria de agendar uma consulta para tratamento."
+  },
+  { 
+    title: "BURSITE", 
+    desc: "Manejo e desinflamação das bursas, bolsas de líquido que protegem os tendões e articulações, mais comuns nos ombros, cotovelos e quadris.", 
+    img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Bursite é a inflamação das bursas, pequenas bolsas que funcionam como amortecedores nas articulações (frequentemente no ombro, quadril ou cotovelo). Provoca dor e restrição de movimento. A intervenção busca reduzir o processo inflamatório e reestabelecer a fluidez do movimento.",
+    whatsappMsg: "Olá, estou com bursite e gostaria de marcar uma avaliação com o Dr. Felipe Lampa para tratamento."
+  },
+  { 
+    title: "CEFALEIAS", 
+    desc: "Investigação da origem e tratamento direcionado para diferentes tipos de dores de cabeça crônicas, incluindo enxaquecas e cefaleias tensionais.", 
+    img: "https://images.unsplash.com/photo-1512069772995-ec65ed5dcafd?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Dores de cabeça crônicas e enxaquecas têm um grande impacto na qualidade de vida. O tratamento muitas vezes vai além do uso de analgésicos, incluindo bloqueios de nervos periféricos e abordagens multidisciplinares para espaçar as crises e reduzir sua intensidade.",
+    whatsappMsg: "Olá, estou sofrendo com dores de cabeça crônicas (cefaleias) e gostaria de agendar uma consulta."
+  },
+  { 
+    title: "PERFORMANCE ESPORTIVA", 
+    desc: "Acompanhamento focado em atletas e praticantes de atividades físicas, otimizando o movimento para alcançar o desempenho máximo com segurança.", 
+    img: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=600",
+    fullDesc: "Estratégias avançadas para melhorar a performance esportiva, analisando a biomecânica e identificando desequilíbrios. O objetivo é atuar preventivamente para evitar lesões, promovendo um corpo preparado para as exigências do esporte em alto nível.",
+    whatsappMsg: "Olá, gostaria de agendar uma avaliação com foco em performance esportiva e otimização do meu desempenho."
+  }
+];
 
 export default function App() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [selectedCondition, setSelectedCondition] = useState<any>(null);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -350, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 350, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background selection:bg-accent/30 selection:text-white">
       {/* Navigation */}
@@ -15,7 +120,7 @@ export default function App() {
             <a href="#formacao" className="hover:text-white transition-colors">Formação</a>
             <a href="#clinicas" className="hover:text-white transition-colors">Clínicas</a>
           </div>
-          <a href="https://api.whatsapp.com/send/?phone=554831971700" target="_blank" rel="noreferrer" className="bg-surface border border-white/10 text-white px-6 py-2.5 text-xs font-semibold uppercase tracking-widest hover:border-accent hover:text-accent transition-colors rounded-full">
+          <a href="#agendamento" className="bg-surface border border-white/10 text-white px-6 py-2.5 text-xs font-semibold uppercase tracking-widest hover:border-accent hover:text-accent transition-colors rounded-full">
             Agendar
           </a>
         </div>
@@ -46,7 +151,7 @@ export default function App() {
             </blockquote>
             
             <div className="flex gap-4">
-              <a href="https://api.whatsapp.com/send/?phone=554831971700" target="_blank" rel="noreferrer" className="bg-accent text-white px-8 py-4 inline-flex items-center justify-center space-x-3 hover:bg-blue-600 transition-colors group w-fit rounded-lg">
+              <a href="#agendamento" className="bg-accent text-white px-8 py-4 inline-flex items-center justify-center space-x-3 hover:bg-blue-600 transition-colors group w-fit rounded-lg">
                 <MessageCircle className="w-5 h-5" />
                 <span className="text-xs font-bold uppercase tracking-widest">Agendar Consulta</span>
                 <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -54,84 +159,64 @@ export default function App() {
             </div>
           </div>
 
-          <div className="w-full max-w-md mx-auto md:ml-auto">
-            <div className="bg-surface p-10 border border-white/5 rounded-2xl relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-accent"></div>
-              <div className="mb-8 border-b border-white/10 pb-6">
-                <h3 className="text-2xl font-serif text-white mb-3">Agende sua Consulta</h3>
-                <p className="text-sm text-secondary font-light leading-relaxed">
-                  Dê o primeiro passo para o alívio da dor. Fale com nossa equipe em Florianópolis via WhatsApp.
-                </p>
-              </div>
-              
-              <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-                <div>
-                  <label htmlFor="name" className="block text-xs font-semibold uppercase tracking-widest text-secondary mb-2">
-                    Nome Completo
-                  </label>
-                  <input 
-                    type="text" 
-                    id="name"
-                    className="w-full bg-background border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-accent transition-colors text-white rounded-lg"
-                    placeholder="Seu nome"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="phone" className="block text-xs font-semibold uppercase tracking-widest text-secondary mb-2">
-                    WhatsApp
-                  </label>
-                  <input 
-                    type="tel" 
-                    id="phone"
-                    className="w-full bg-background border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-accent transition-colors text-white rounded-lg"
-                    placeholder="(00) 00000-0000"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-xs font-semibold uppercase tracking-widest text-secondary mb-2">
-                    Principal Queixa
-                  </label>
-                  <textarea 
-                    id="message"
-                    rows={3}
-                    className="w-full bg-background border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-accent transition-colors text-white resize-none rounded-lg"
-                    placeholder="Descreva brevemente..."
-                  ></textarea>
-                </div>
-                
-                <button type="submit" className="w-full bg-surface border border-accent text-accent px-6 py-4 text-xs font-bold uppercase tracking-widest hover:bg-accent hover:text-white transition-colors mt-4 flex justify-center items-center space-x-2 rounded-lg">
-                  <span>Solicitar Contato</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </form>
+          <div className="w-full max-w-md mx-auto md:ml-auto relative">
+            <div className="aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 hidden md:block">
+              <img src="/img2.jpeg" alt="Dr. Felipe Lampa" className="w-full h-full object-cover object-[center_10%]" />
+            </div>
+            <div className="absolute -bottom-6 -left-6 bg-surface p-6 rounded-xl border border-white/5 shadow-2xl hidden md:block">
+               <p className="text-sm font-bold text-white uppercase tracking-widest mb-1">Dr. Felipe Lampa</p>
+               <p className="text-xs text-secondary">Especialista em Dor Crônica</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Serviços Oferecidos */}
-      <section id="servicos" className="py-24 px-6 border-t border-white/5">
+      <section id="servicos" className="py-24 px-6 border-t border-white/5 bg-surface/30">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center mb-16">
-            <div className="w-8 h-[2px] bg-accent mr-4"></div>
-            <h2 className="text-sm font-bold tracking-widest uppercase text-white">Especialidades e Tratamentos</h2>
+          <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">Doenças atendidas</h2>
+              <p className="text-secondary font-light text-lg max-w-3xl leading-relaxed">
+                Com vasta experiência no tratamento de diversas condições dolorosas, o Dr. Felipe Lampa integra seu conhecimento especializado, técnicas avançadas e abordagens multidisciplinares para o alívio da dor e recuperação funcional.
+              </p>
+            </div>
+            <div className="flex gap-4 shrink-0">
+              <button 
+                onClick={scrollLeft}
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/40 transition-colors"
+                aria-label="Anterior"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button 
+                onClick={scrollRight}
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/40 transition-colors"
+                aria-label="Próximo"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { title: "Medicina Regenerativa", desc: "Recuperação de tecidos e articulações utilizando o potencial curativo do próprio corpo." },
-              { title: "Manejo de Dor Crônica", desc: "Diagnóstico e tratamento especializado para dores persistentes que afetam sua rotina." },
-              { title: "Lesões Esportivas", desc: "Protocolos focados no retorno rápido e seguro ao esporte para atletas amadores e profissionais." },
-              { title: "Procedimentos Guiados por Ultrassom", desc: "Intervenções minimamente invasivas com máxima precisão e segurança." },
-              { title: "Tratamento de Dor Neuropática", desc: "Controle eficaz de dores originadas no sistema nervoso." },
-              { title: "Dores na Coluna e Articulações", desc: "Alívio direcionado para cervical, torácica, lombar, joelhos e ombros." }
-            ].map((service, index) => (
-              <div key={index} className="bg-surface border border-white/5 p-8 rounded-xl hover:bg-white/5 transition-colors">
-                <div className="w-2 h-2 rounded-full bg-accent mb-6"></div>
-                <h3 className="text-white font-medium tracking-wide leading-relaxed mb-2">{service.title}</h3>
-                <p className="text-secondary text-sm font-light leading-relaxed">{service.desc}</p>
+          <div 
+            ref={scrollContainerRef}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] scroll-smooth"
+          >
+            {CONDITIONS.map((service, index) => (
+              <div 
+                key={index}
+                onClick={() => setSelectedCondition(service)}
+                className="flex flex-col min-w-[300px] md:min-w-[350px] w-full md:w-[350px] bg-background border border-white/10 rounded-2xl overflow-hidden snap-center hover:border-accent/50 transition-colors shrink-0 group cursor-pointer"
+              >
+                <div className="h-56 overflow-hidden relative">
+                  <div className="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
+                  <img src={service.img} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                </div>
+                <div className="p-8 flex flex-col flex-1 bg-[#1e2433]/40 border-t border-accent/20">
+                  <h3 className="text-white font-bold tracking-widest text-sm mb-4 text-center">{service.title}</h3>
+                  <p className="text-secondary text-sm font-light leading-relaxed text-center">{service.desc}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -327,48 +412,23 @@ export default function App() {
                     <Star key={i} className="w-4 h-4 fill-accent text-accent" />
                   ))}
                 </div>
-                <span className="text-secondary text-sm ml-2">55 avaliações no Google</span>
+                <span className="text-secondary text-sm ml-2">62 críticas no Google</span>
               </div>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <ReviewCard
-              name="Eliseu Cardoso"
-              metadata="5 avaliações"
-              date="2 meses atrás"
-              content="Deixo aqui meu reconhecimento e agradecimento ao Dr. Felipe Lampa pelo trabalho excepcional realizado na lesão do joelho. Desde o início ficou evidente o alto nível de preparo e especialização."
-            />
-            <ReviewCard
-              name="RH Elohim"
-              metadata="1 avaliação"
-              date="2 meses atrás"
-              content="Tive a honra de ser atendido pelo Dr. Felipe Lampa e posso afirmar com convicção: é um profissional diferenciado. Especialista em dor, demonstra um conhecimento técnico profundo, segurança..."
-            />
-            <ReviewCard
-              name="Peter Montibeller"
-              metadata="1 avaliação"
-              date="2 meses atrás"
-              content="Sou muito grato ao Dr. Felipe Lampa e a smart. Treinando Jiu Jitsu, tive duas na tíbia e no joelho, além da lesão no LCA que rompeu por completo. Por conta do meu trabalho eu não poderia operar, foi aí que a smart me ajudou. Fizemos duas..."
-            />
-            <ReviewCard
-              name="Loreni Maria de Oliveira"
-              metadata="5 avaliações"
-              date="3 meses atrás"
-              content="Dr. Felipe Lampa é um médico muito competente tecnicamente atualizado e humanizado demonstrando empatia e boa comunicação. Sua competência e cuidado estão fazendo toda a diferença no meu tratamento."
-            />
-            <ReviewCard
-              name="Luciano Bernert"
-              metadata="21 avaliações"
-              date="4 meses atrás"
-              content="Tive uma experiência excelente na clínica do Dr. Felipe Lampa. Já indico vários atletas para ele há algum tempo, mas também fiz meu próprio tratamento de hérnia de disco, problema no quadril e aplicações na cervical e lombar."
-            />
-            <ReviewCard
-              name="Dafne Cunha"
-              metadata="1 avaliação"
-              date="3 meses atrás"
-              content="Gostaria de deixar meus agradecimentos ao Dr Felipe Lampa!!!Eu sofria a mais de um ano com uma dor crônica em meu pé esquerdo, Dr Felipe foi um anjo em vida além de um profissional de excelência..."
-            />
+          <div className="flex w-full overflow-hidden pb-8 pt-4">
+            <div className="flex gap-6 w-max animate-infinite-scroll">
+              {[...REVIEWS, ...REVIEWS].map((review, index) => (
+                <ReviewCard
+                  key={index}
+                  name={review.name}
+                  metadata={review.metadata}
+                  date={review.date}
+                  content={review.content}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -400,6 +460,123 @@ export default function App() {
               <p className="text-secondary font-light mb-10 leading-relaxed">
                 Empresa focada em soluções ágeis e de excelência em anestesia ambulatorial, garantindo segurança e conforto nos procedimentos.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Condições Tratadas & SEO */}
+      <section className="py-24 px-6 border-t border-white/5 bg-surface/30">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center mb-12">
+            <div className="w-8 h-[2px] bg-accent mr-4"></div>
+            <h2 className="text-sm font-bold tracking-widest uppercase text-white">Abordagem Completa</h2>
+          </div>
+          <div className="space-y-6 text-secondary font-light text-lg leading-relaxed">
+            <p>
+              O Dr. Felipe Lampa é especialista no diagnóstico e tratamento de condições que afetam a mobilidade, desempenho físico e qualidade de vida dos pacientes. Através da <strong className="text-white font-medium">medicina regenerativa</strong> e de procedimentos minimamente invasivos guiados por ultrassom, é possível tratar diferentes causas de dor de forma precisa e personalizada.
+            </p>
+            <p>
+              Entre as principais condições atendidas estão <strong className="text-white font-medium">dor lombar</strong>, <strong className="text-white font-medium">dor cervical</strong>, <strong className="text-white font-medium">dor articular</strong>, <strong className="text-white font-medium">dor neuropática</strong>, <strong className="text-white font-medium">lesão muscular</strong>, <strong className="text-white font-medium">epicondilite</strong>, <strong className="text-white font-medium">bursite</strong> e <strong className="text-white font-medium">cefaleias</strong>.
+            </p>
+            <p>
+              Pacientes que sofrem com dores persistentes na coluna, pescoço, ombros, joelhos, quadril ou que apresentam limitações causadas por lesões esportivas podem se beneficiar de uma avaliação especializada para identificar a origem do problema e definir o melhor plano terapêutico.
+            </p>
+            <p>
+              Além do tratamento da dor, a Smart Medicine também atua na recuperação funcional e na <strong className="text-white font-medium">performance esportiva</strong>, auxiliando atletas amadores e profissionais a retornarem às suas atividades com mais segurança, desempenho e qualidade de movimento.
+            </p>
+            <p>
+              Se você procura tratamento para dor lombar, dor cervical, dor articular, dor neuropática, lesões musculares, bursite, epicondilite, cefaleias ou deseja melhorar sua performance esportiva em Florianópolis, agende uma avaliação com o Dr. Felipe Lampa e conheça as opções de tratamento disponíveis.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Contato e Agendamento */}
+      <section id="agendamento" className="py-32 px-6 border-t border-white/5 relative overflow-hidden">
+        <div className="absolute inset-0 bg-accent/5"></div>
+        <div className="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <div className="flex items-center mb-6">
+              <div className="w-8 h-[2px] bg-accent mr-4"></div>
+              <h2 className="text-sm font-bold tracking-widest uppercase text-white">Contato</h2>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">
+              Agende sua <span className="italic text-secondary">Consulta</span>
+            </h2>
+            <p className="text-secondary text-lg font-light leading-relaxed mb-10 max-w-lg">
+              Dê o primeiro passo para o alívio da dor. Preencha o formulário e nossa equipe em Florianópolis entrará em contato via WhatsApp para agendar seu horário.
+            </p>
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-surface border border-white/10 flex items-center justify-center shrink-0">
+                   <MessageCircle className="w-5 h-5 text-accent" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-1">Canal Direto</p>
+                  <p className="text-white font-serif text-xl">(48) 3197-1700</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="w-full max-w-md mx-auto lg:mr-0">
+            <div className="bg-surface p-10 border border-white/5 rounded-2xl shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-1 bg-accent"></div>
+              <div className="mb-8 border-b border-white/10 pb-6">
+                <h3 className="text-2xl font-serif text-white mb-3">Solicite Agendamento</h3>
+                <p className="text-sm text-secondary font-light leading-relaxed">
+                  Preencha os dados abaixo e retornaremos rapidamente.
+                </p>
+              </div>
+              
+              <form className="space-y-5" onSubmit={(e) => {
+                  e.preventDefault();
+                  window.open("https://api.whatsapp.com/send/?phone=554831971700", "_blank");
+                }}>
+                <div>
+                  <label htmlFor="name" className="block text-xs font-semibold uppercase tracking-widest text-secondary mb-2">
+                    Nome Completo
+                  </label>
+                  <input 
+                    type="text" 
+                    id="name"
+                    required
+                    className="w-full bg-background border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-accent transition-colors text-white rounded-lg"
+                    placeholder="Seu nome"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="phone" className="block text-xs font-semibold uppercase tracking-widest text-secondary mb-2">
+                    WhatsApp
+                  </label>
+                  <input 
+                    type="tel" 
+                    id="phone"
+                    required
+                    className="w-full bg-background border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-accent transition-colors text-white rounded-lg"
+                    placeholder="(00) 00000-0000"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-xs font-semibold uppercase tracking-widest text-secondary mb-2">
+                    Principal Queixa
+                  </label>
+                  <textarea 
+                    id="message"
+                    rows={3}
+                    className="w-full bg-background border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-accent transition-colors text-white resize-none rounded-lg"
+                    placeholder="Descreva brevemente..."
+                  ></textarea>
+                </div>
+                
+                <button type="submit" className="w-full bg-surface border border-accent text-accent px-6 py-4 text-xs font-bold uppercase tracking-widest hover:bg-accent hover:text-white transition-colors mt-4 flex justify-center items-center space-x-2 rounded-lg">
+                  <span>Solicitar Contato via WhatsApp</span>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -453,6 +630,43 @@ export default function App() {
           
         </div>
       </footer>
+
+      {/* Modal / Dialog for Condition */}
+      {selectedCondition && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setSelectedCondition(null)}></div>
+          <div className="relative w-full max-w-lg bg-surface border border-white/10 rounded-2xl p-8 md:p-10 shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+            <button 
+              onClick={() => setSelectedCondition(null)}
+              className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-secondary hover:text-white hover:bg-white/10 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="mb-6">
+              <span className="text-xs font-bold tracking-widest text-accent uppercase mb-2 block">Área de Atuação</span>
+              <h2 className="text-2xl md:text-3xl font-serif text-white">{selectedCondition.title}</h2>
+            </div>
+            <img 
+              src={selectedCondition.img} 
+              alt={selectedCondition.title} 
+              className="w-full h-48 object-cover rounded-xl mb-6 shadow-xl"
+            />
+            <p className="text-secondary text-lg font-light leading-relaxed mb-8">
+              {selectedCondition.fullDesc}
+            </p>
+            <a 
+              href={`https://api.whatsapp.com/send/?phone=554831971700&text=${encodeURIComponent(selectedCondition.whatsappMsg)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="w-full bg-accent text-white px-6 py-4 flex items-center justify-center gap-3 hover:bg-blue-600 transition-colors uppercase tracking-widest text-xs font-bold rounded-xl group"
+            >
+              <MessageCircle className="w-5 h-5" />
+              <span>Agendar no WhatsApp</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -473,7 +687,7 @@ function TimelineItem({ year, title, description }: { year: string, title: strin
 
 function ReviewCard({ name, metadata, date, content }: { name: string, metadata: string, date: string, content: string }) {
   return (
-    <div className="bg-surface border border-white/5 p-8 rounded-xl flex flex-col gap-4 hover:bg-white/5 transition-colors">
+    <div className="bg-background border border-white/10 p-8 rounded-2xl flex flex-col gap-4 hover:border-accent/40 transition-colors min-w-[300px] md:min-w-[350px] w-full md:w-[350px] snap-center shrink-0">
       <div className="flex gap-1">
         {[1, 2, 3, 4, 5].map((i) => (
           <Star key={i} className="w-4 h-4 fill-accent text-accent" />
