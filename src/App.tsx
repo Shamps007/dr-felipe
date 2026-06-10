@@ -159,11 +159,11 @@ export default function App() {
             </div>
           </div>
 
-          <div className="w-full max-w-lg md:max-w-xl mx-auto md:ml-auto relative">
-            <div className="aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 hidden md:block">
+          <div className="w-full max-w-sm md:max-w-xl mx-auto md:ml-auto relative mt-16 md:mt-0">
+            <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-2xl border border-white/10">
               <img src="/img2.jpeg" alt="Dr. Felipe Lampa" className="w-full h-full object-cover object-[center_10%]" />
             </div>
-            <div className="absolute -bottom-6 -left-6 bg-surface p-6 rounded-xl border border-white/5 shadow-2xl hidden md:block">
+            <div className="absolute -bottom-8 left-4 right-4 md:-bottom-6 md:-left-6 md:right-auto bg-surface p-5 md:p-6 rounded-xl border border-white/5 shadow-2xl">
                <p className="text-base font-bold text-white uppercase tracking-widest mb-1">Dr. Felipe Lampa</p>
                <p className="text-sm text-secondary">Especialista em Dor Crônica</p>
             </div>
