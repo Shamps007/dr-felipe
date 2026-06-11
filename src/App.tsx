@@ -49,7 +49,7 @@ const CONDITIONS = [
   { 
     title: "DOR NEUROPÁTICA", 
     desc: "A dor neuropática resulta de danos ou disfunções no sistema nervoso. Caracteriza-se por sensações de queimação, formigamento ou choque.", 
-    img: "/Dor Neuropática.webp",
+    img: "/dor neuropática.jpg",
     fullDesc: "Causada por disfunção ou lesão nos nervos, é frequentemente descrita como choque, pontada ou queimação, podendo estar associada à diabetes, infecções (como herpes-zóster) ou compressões nervosas (ciático). Requer um manejo muito específico para o controle neurológico.",
     whatsappMsg: "Olá, sofro de dor neuropática (choques/queimação) e gostaria de agendar uma avaliação com o especialista."
   },
@@ -268,7 +268,7 @@ export default function App() {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
             <div className="overflow-hidden bg-surface border border-white/5 aspect-[4/5] rounded-xl">
-              <img src="/img2.jpeg" alt="Dr. Felipe Lampa" className="w-full h-full object-cover object-[center_10%] transition-transform duration-700 hover:scale-105 opacity-90 hover:opacity-100" />
+              <img src="/choque.jpeg" alt="Estrutura e Procedimentos" className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105 opacity-90 hover:opacity-100" />
             </div>
             <div className="overflow-hidden bg-surface border border-white/5 aspect-[4/5] rounded-xl">
               <img src="/img3.jpeg" alt="Dr. Felipe atuando" className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105 opacity-90 hover:opacity-100" />
